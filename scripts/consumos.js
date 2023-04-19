@@ -142,6 +142,11 @@ function editCombos(comboId, nombre, bodyProductos) {
     return consumoAjax("PUT", url, JSON.stringify(body), "application/json;charset=UTF-8");
 }
 //---------------------------------------------------------------------------------------
+function ventasGetAll() {
+    //return consumoAjax("GET", urlBase + "User/GetAll", "", "");
+    return consumoAjax("GET", "consumos/listventas.json", "", "");
+}
+//---------------------------------------------------------------------------------------
 function consumoAjax(method, url, body, contentType) {
     let promise = new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();

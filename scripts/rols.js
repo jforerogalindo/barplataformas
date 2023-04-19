@@ -5,7 +5,6 @@ function validarRol() {
         location.href = "index.html";
     }
     else {
-
         if (rolActual == 1) {
             $("#admon").show();
             $("#sales").show();
@@ -19,7 +18,6 @@ function validarRol() {
             $("#reports").hide();
             $("#sales").hide();
         }
-
         cargar("index");
     }
 }

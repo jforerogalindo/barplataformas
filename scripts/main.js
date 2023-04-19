@@ -16,6 +16,7 @@ function cargar(name) {
 async function load(url) {
   let consumos = loadJs(url + "/consumos.js");
   let users = loadJs(url + "/users.js");
+  let ventas = loadJs(url + "/ventas.js");
   let login = loadJs(url + "/login.js");
   let products = loadJs(url + "/products.js");
   let combos = loadJs(url + "/combos.js");
@@ -24,6 +25,7 @@ async function load(url) {
 
   await consumos;
   await users;
+  await ventas;
   await login;
   await products;
   await combos;
