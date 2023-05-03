@@ -85,6 +85,25 @@ function deleteSupplier(supplierId) {
     return consumoAjax("DELETE", urlBase + "Purchases/Delete/" + supplierId, "", "");
 }
 //---------------------------------------------------------------------------------------
+function sedeGetAll() {
+    //return consumoAjax("GET", urlBase + "Products/GetAll", "", "");
+    return consumoAjax("GET", "consumos/listsede.json", "", "");
+}
+//---------------------------------------------------------------------------------------
+function insertSede(nombre, direccion, telefono) {
+    url = urlBase + "Sedes/Insert";
+    body = {
+        "nombre": nombre,
+        "direccion": direccion,
+        "telefono": telefono
+    }
+    return consumoAjax("POST", url, JSON.stringify(body), "application/json;charset=UTF-8");
+}
+//---------------------------------------------------------------------------------------
+function deleteSede(sedeId) {
+    return consumoAjax("DELETE", urlBase + "Sedes/Delete/" + sedeId, "", "");
+}
+//---------------------------------------------------------------------------------------
 function productGetAll() {
     //return consumoAjax("GET", urlBase + "Products/GetAll", "", "");
     return consumoAjax("GET", "consumos/listproductos.json", "", "");
