@@ -10,7 +10,7 @@ async function listaSede() {
             response[key].direccion +
             "</td><td>" +
             response[key].telefono +
-            '</td><td class="text-center"><a class="text-warning" onclick="cargaEditarProducto('+response[key].id +
+            '</td><td class="text-center"><a class="text-warning" onclick="cargaEditarSede('+response[key].id +
             ')" data-bs-toggle="modal" data-bs-target="#modalEditar"><i class="fa-regular fa-pen-to-square"></i></a></td><td class="text-center"><a class="text-danger" onclick="eliminarSede('+response[key].id +
             ')"><i class="fa-regular fa-trash"></i></a></td></tr>';
         $("#sedeTableBody").append(newRowContent);
@@ -74,6 +74,48 @@ async function eliminarSede(sedeId){
 	} else {
 		swalResponse.fire({
 			text: "Error al eliminar la Sede, por favor reintenta más tarde",
+			icon: "error",
+		});
+	}
+}
+
+function cargaEditarSede(id){
+    $("#editar").click(function(){
+        editarSede(id);
+        $("#spinnerEditar").show();
+        limpiarModalEditar();
+    });
+}
+
+async function editarSede(id){
+    var nombre = $("#nombreEdit").val();
+    var identification = $("#identificacionEdit").val();
+    var direccion = $("#direccionEdit").val();
+    var telefono = $("#telefonoEdit").val();
+    try {
+        var response = await editSede(identification, nombre, direccion, telefono);
+    } catch (e) {
+        $("#spinnerEditar").hide();
+        $("#cancelarEditar").click();
+        swalResponse.fire({
+            text: "Error al editar la sede, por favor reintenta más tarde",
+            icon: "error",
+        });
+        return;
+    }
+	if (response.success) {
+        $("#spinnerEditar").hide();
+        $("#cancelarEditar").click();
+		swalResponse.fire({
+			text: "Sede editada!",
+			icon: "success",
+		});
+        $("#contenido").load("pages/sede.html");
+	} else {
+        $("#spinnerEditar").hide();
+        $("#cancelarEditar").click();
+		swalResponse.fire({
+			text: "Error al editar la sede, por favor reintenta más tarde",
 			icon: "error",
 		});
 	}

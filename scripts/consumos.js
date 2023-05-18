@@ -22,14 +22,17 @@ function ajaxlogin(userName, password) {
     return consumoAjax("POST", url, JSON.stringify(body), "application/json;charset=UTF-8");
 }
 //---------------------------------------------------------------------------------------
-function insertUser(identification, name, password, rolId, idbranch) {
+function insertUser(identification, name, lastname, mail, phone, password, rolId, sedeId) {
     url = urlBase + "User/Insert";
     body = {
         "identification": identification,
         "name": name,
+        "lastname" : lastname,
+        "mail" : mail,
+        "phone" : phone,
         "password": password,
         "rolId": rolId,
-        "idbranch": idbranch
+        "sedeId": sedeId
     }
     return consumoAjax("POST", url, JSON.stringify(body), "application/json;charset=UTF-8");
 }
@@ -38,12 +41,16 @@ function deleteUser(userId) {
     return consumoAjax("DELETE", urlBase + "User/Delete/" + userId, "", "");
 }
 //---------------------------------------------------------------------------------------
-function editUser(identification, userName, password, rolId) {
+function editUser(identification, name, lastname, mail, phone, password, rolId, sedeId) {
     url = urlBase + "User/Edit/" + identification;
     body = {
-        "name": userName,
+        "name": name,
+        "lastname": lastname,
+        "mail": mail,
+        "phone": phone,
         "password": password,
-        "rolId": rolId
+        "rolId": rolId,
+        "sedeId": sedeId
     }
     return consumoAjax("PUT", url, JSON.stringify(body), "application/json;charset=UTF-8");
 }
@@ -102,6 +109,16 @@ function insertSede(nombre, direccion, telefono) {
 //---------------------------------------------------------------------------------------
 function deleteSede(sedeId) {
     return consumoAjax("DELETE", urlBase + "Sedes/Delete/" + sedeId, "", "");
+}
+//---------------------------------------------------------------------------------------
+function editSede(sedeId, nombre, direccion, telefono) {
+    url = urlBase + "Sedes/Edit/" + sedeId;
+    body = {
+        "nombre": nombre,
+        "direccion": direccion,
+        "telefono": telefono
+    }
+    return consumoAjax("PUT", url, JSON.stringify(body), "application/json;charset=UTF-8");
 }
 //---------------------------------------------------------------------------------------
 function productGetAll() {

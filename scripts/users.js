@@ -12,14 +12,22 @@ const swalResponse = Swal.mixin({
 function limpiarModalAgregar(){
     $("#identificacion").val("");
     $("#nombre").val("");
+    $("#apellido").val("");
+    $("#correo").val("");
+    $("#telefono").val("");
     $("#password").val("");
     $("#rol").val("");
+    $("#sede").val("");
 }
 
 function limpiarModalEditar(){
     $("#nombreEdit").val("");
+    $("#apellidoEdit").val("");
+    $("#correoEdit").val("");
+    $("#telefonoEdit").val("");
     $("#passwordEdit").val("");
     $("#rolEdit").val("");
+    $("#sedeEdit").val("");
 }
 
 async function getRol(rolId) {
@@ -32,18 +40,38 @@ async function getRol(rolId) {
     }
 }
 
+async function getSede(sedeId) {
+    var sedes = await sedeGetAll();
+    for (const key in sedes) {
+        if (sedeId === sedes[key].id) {
+            //console.log(roles[key].rolName)
+            return sedes[key].nombre;
+        }
+    }
+}
+
 async function listaUsuarios() {
     var response = await userGetAll();
     for (const key in response) {
         var newRowContent =
             '<tr><td scope="row">' +
+            response[key].id +
+            '<td>' +
             response[key].identification +
             "</td><td>" +
             response[key].name +
             "</td><td>" +
+            response[key].lastname +
+            "</td><td>" +
+            response[key].mail +
+            "</td><td>" +
+            response[key].telefono +
+            "</td><td>" +
             (await getRol(response[key].rolId)) +
-            '</td><td class="text-center"><a class="text-warning" onclick="cargaEditarUsuario('+response[key].identification +
-            ')" data-bs-toggle="modal" data-bs-target="#modalEditar"><i class="fa-regular fa-pen-to-square"></i></a></td><td class="text-center"><a class="text-danger" onclick="eliminarUsuario('+response[key].identification +
+            "</td><td>" +
+            (await getSede(response[key].sedeId)) +
+            '</td><td class="text-center"><a class="text-warning" onclick="cargaEditarUsuario('+response[key].id +
+            ')" data-bs-toggle="modal" data-bs-target="#modalEditar"><i class="fa-regular fa-pen-to-square"></i></a></td><td class="text-center"><a class="text-danger" onclick="eliminarUsuario('+response[key].id +
             ')"><i class="fa-regular fa-trash"></i></a></td></tr>';
         $("#userTableBody").append(newRowContent);
     }
@@ -60,6 +88,20 @@ async function listaRoles() {
             "</option>";
         $("#rol").append(newOptionRol);
         $("#rolEdit").append(newOptionRol);
+    }
+}
+
+async function listaSedes() {
+    var response = await sedeGetAll();
+    for (const key in response) {
+        var newOptionRol =
+            '<option value="' +
+            response[key].id +
+            '">' +
+            response[key].nombre +
+            "</option>";
+        $("#sede").append(newOptionRol);
+        $("#sedeEdit").append(newOptionRol);
     }
 }
 
@@ -116,13 +158,17 @@ function cargaEditarUsuario(identification){
     });
 }
 
-async function editarUser(identification){
+async function editarUser(id){
     var nombre = $("#nombreEdit").val();
+    var apellido = $("#apelldioEdit").val();
+    var correo = $("#correoEdit").val();
+    var telefono = $("#telefonoEdit").val();
     var password = $("#passwordEdit").val();
     var rolId = $("#rolEdit").val();
+    var sede = $("#sedeEdit").val();
     rolId = rolId == null || rolId == undefined || rolId == "" ? 0 : rolId;
     try {
-        var response = await editUser(identification, nombre, password, rolId);
+        var response = await editUser(identification, nombre,apellido,correo,telefono, password, rolId,sede);
     } catch (e) {
         $("#spinnerEditar").hide();
         $("#cancelarEditar").click();
@@ -152,10 +198,9 @@ async function editarUser(identification){
 	}
 }
 
-async function agregarUsuario(identification,nombre,password,rol){
-    idbranch = 1101;
+async function agregarUsuario(identification,nombre,apellido,correo,telefono,password,rol,sede){
     try {
-        var response = await insertUser(identification, nombre, password, rol, idbranch);
+        var response = await insertUser(identification,nombre,apellido,correo,telefono,password,rol,sede);
     } catch (e) {
         $("#spinnerAgregar").hide();
         $("#cancelarAgregar").click();

@@ -56,6 +56,44 @@
         </div>
     </div>
 </div>
+<!-- Modal editar-->
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Sede</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="mb-3">
+                        <label for="identificacionEdit" class="fomr-label">id</label>
+                        <input class="form-control" id="identificacionEdit" type="identificacionEdit">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombreEdit" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombreEdit">
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccionEdit" class="form-label">Direccion</label>
+                        <input type="text" class="form-control" id="direccionEdit">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefonoEdit" class="form-label">Telefono</label>
+                        <input type="text" class="form-control" id="telefonoEdit">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelarEditar" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button id="editar" type="button" class="btn btn-primary">
+                    <span id="spinnerEditar" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                    Actualizar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     listaSede();
@@ -70,4 +108,7 @@
     $("#cancelarAgregar").click(function(){
         limpiarModalAgregar();
     });
+    $("#cancelarEditar #editar").click(function(){
+        limpiarModalEditar();
+    })
 </script>
