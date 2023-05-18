@@ -10471,4 +10471,14 @@ fieldset:disabled .btn {
     display: none !important;
   }
 }
+
+/*Personalizacion -------------------------------------------*/
+#activa {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-success-rgb), var(--bs-text-opacity)) !important;
+}
+#inactiva {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-danger-rgb), var(--bs-text-opacity)) !important;  
+}
 /*# sourceMappingURL=bootstrap.min.css.map */

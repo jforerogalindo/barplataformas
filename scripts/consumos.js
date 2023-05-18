@@ -183,6 +183,35 @@ function ventasGetAll() {
     return consumoAjax("GET", "consumos/listventas.json", "", "");
 }
 //---------------------------------------------------------------------------------------
+function mesasGetAll() {
+    return consumoAjax("GET", "consumos/listmesas.json", "", "");
+}
+//---------------------------------------------------------------------------------------
+function deleteMesa(mesaId) {
+    return consumoAjax("DELETE", urlBase + "Mesas/Delete/" + MesaId, "", "");
+}
+//---------------------------------------------------------------------------------------
+function insertMesa(nombre,estado,sedeId) {
+    url = urlBase + "Mesas/Insert";
+    body = {
+        "nombre": nombre,
+        "estado": estado,
+        "sedeId":sedeId
+    }
+    return consumoAjax("POST", url, JSON.stringify(body), "application/json;charset=UTF-8");
+}
+//---------------------------------------------------------------------------------------
+function editMesa(id, nombre, estado, sede) {
+    url = urlBase + "Mesas/Edit/" + id;
+    body = {
+        "nombre": nombre,
+        "estado": estado,
+        "sede": sede
+      }
+    return consumoAjax("PUT", url, JSON.stringify(body), "application/json;charset=UTF-8");
+}
+
+//---------------------------------------------------------------------------------------
 function consumoAjax(method, url, body, contentType) {
     let promise = new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();
