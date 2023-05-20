@@ -62,7 +62,7 @@ function rolsGetAll() {
 //---------------------------------------------------------------------------------------
 function userGetAll() {
     //return consumoAjax("GET", urlBase + "User/GetAll", "", "");
-    return consumoAjax("GET", "consumos/listuser.json", "", "");
+    return consumoAjax("GET", "http://127.0.0.1:8000/empleado/", "", "");
 }
 //---------------------------------------------------------------------------------------
 function supplierGetAll() {

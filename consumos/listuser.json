@@ -29,7 +29,18 @@
     "mail": "correo@correo.com",
     "telefono": 3114567890,
     "password": "XXXXXXXXXXXX",
-    "rolId": 1,
+    "rolId": 3,
+    "sedeId": 2
+  },
+  {
+    "id":4,
+    "identification": "1015471844",
+    "name": "Daniel",
+    "lastname": "Urbina",
+    "mail": "danriursa@hotmail.com",
+    "telefono": 3058102491,
+    "password": "abc",
+    "rolId": 3,
     "sedeId": 2
   }
 ]
